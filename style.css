@@ -2,26 +2,50 @@
   margin:0;
   padding:0;
   box-sizing:border-box;
+  font-family:Arial, sans-serif;
 }
 
 body{
   min-height:100vh;
-  background:
-    radial-gradient(circle at top, #0b0b0b, #050505 60%, #000);
+  background:radial-gradient(circle at top,#0b0b0b,#050505 60%,#000);
+  display:flex;
+  justify-content:center;
+  align-items:center;
 }
 
-/* лёгкая анимация фона */
-body::before{
+/* === ОСНОВНАЯ ОБВОДКА === */
+.frame{
+  width:380px;
+  height:520px;
+  border-radius:22px;
+  background:linear-gradient(180deg,#0a0a0a,#111,#0a0a0a);
+  box-shadow:
+    0 0 25px rgba(255,255,255,.06),
+    0 20px 50px rgba(0,0,0,.9);
+  position:relative;
+  animation:glow 4s ease-in-out infinite;
+}
+
+/* светящаяся рамка */
+.frame::before{
   content:"";
-  position:fixed;
-  inset:0;
-  background:
-    radial-gradient(circle at 20% 20%, rgba(255,255,255,.03), transparent 40%),
-    radial-gradient(circle at 80% 80%, rgba(255,255,255,.03), transparent 40%);
-  animation: floatBg 12s linear infinite alternate;
+  position:absolute;
+  inset:-2px;
+  border-radius:inherit;
+  background:linear-gradient(45deg,#fff,#777,#fff);
+  opacity:.15;
+  filter:blur(10px);
+  z-index:-1;
 }
 
-@keyframes floatBg{
-  from{transform:translateY(0)}
-  to{transform:translateY(-40px)}
+/* анимация свечения */
+@keyframes glow{
+  0%,100%{
+    box-shadow:0 0 20px rgba(255,255,255,.05),
+               0 20px 40px rgba(0,0,0,.8);
+  }
+  50%{
+    box-shadow:0 0 40px rgba(255,255,255,.12),
+               0 30px 60px rgba(0,0,0,.95);
+  }
 }
